@@ -50,7 +50,6 @@ router.patch('/:id', async function(req,res) {
       age: req.body.age
     };
     const savedUser = await db.collection('users').doc(req.params.id).update(user);
-    console.log('Updated user with ID: ', savedUser.id);
     let updatedUser = await db.collection('users').doc(req.params.id).get();
     updatedUser = updatedUser.data();
     delete updatedUser.password;
