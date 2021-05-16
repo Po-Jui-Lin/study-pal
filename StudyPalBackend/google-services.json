@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "913841553173",
+    "project_id": "study-pal-dff4c",
+    "storage_bucket": "study-pal-dff4c.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:913841553173:android:5baeebcfb93229c884731c",
+        "android_client_info": {
+          "package_name": "com.example.study_pal"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "913841553173-prnlgqj63hcn52fvb59c2076nkktue6h.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCWPgI9V75dM3OMOxArhiWyUM5ChLC9YKA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "913841553173-prnlgqj63hcn52fvb59c2076nkktue6h.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
