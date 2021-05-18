@@ -5,7 +5,7 @@ class TodosProvider extends ChangeNotifier {
   List<Todo> _todos = [
     Todo(
       createdTime: DateTime.now(),
-      title: 'Buy Food 😋',
+      title: 'Buy Food',
       description: '''- Eggs
 - Milk
 - Bread
@@ -20,16 +20,15 @@ class TodosProvider extends ChangeNotifier {
     ),
     Todo(
       createdTime: DateTime.now(),
-      title: 'Walk the Dog 🐕',
+      title: 'Walk the Dog ',
     ),
     Todo(
       createdTime: DateTime.now(),
-      title: 'Plan Jacobs birthday party 🎉🥳',
+      title: 'Plan Jacobs birthday party',
     ),
   ];
 
-  // todo: change it to returning all items
-  List<Todo> get todos => _todos.where((todo) => todo.isDone == false).toList();
+  List<Todo> get todos => _todos;
 
   void addTodo(Todo todo) {
     _todos.add(todo);

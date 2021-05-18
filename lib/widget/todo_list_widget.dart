@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:study_pal/model/todo.dart';
 import 'package:study_pal/provider/todos.dart';
 import 'package:study_pal/widget/todo_widget.dart';
 

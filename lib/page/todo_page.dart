@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:study_pal/main.dart';
 import 'package:study_pal/widget/add_todo_dialog_widget.dart';
+import 'package:study_pal/widget/todo_list_widget.dart';
 
 class TodoPage extends StatefulWidget {
   const TodoPage({Key key}) : super(key: key);
@@ -16,7 +17,7 @@ class _TodoPageState extends State<TodoPage> {
       appBar: AppBar(
         title: Text(MyApp.title),
       ),
-      body: Container(),
+      body: TodoListWidget(),
       floatingActionButton: FloatingActionButton(
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(20),
