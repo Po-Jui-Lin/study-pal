@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:study_pal/chat/chatScreens/input.dart';
+import 'package:study_pal/chat/chatScreens/message_list.dart';
 
 class Chat extends StatefulWidget {
   @override
@@ -19,9 +20,9 @@ class _ChatState extends State<Chat> {
         children: <Widget>[
           Column(
             children: <Widget>[
-              Text("hello"),
+              // Text("hello"),
               // List of messages
-              // MessageList(peer: peer),
+              MessageList(),
 
               // Input content
               input(),
