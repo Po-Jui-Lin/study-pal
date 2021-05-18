@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:study_pal/chat/chatScreens/chat.dart';
 
 void main() {
   runApp(MyApp());
@@ -104,7 +105,13 @@ class _MyHomePageState extends State<MyHomePage> {
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
+        // onPressed: _incrementCounter,
+        onPressed: () => Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => Chat(),
+          ),
+        ),
         tooltip: 'Increment',
         child: Icon(Icons.add),
       ), // This trailing comma makes auto-formatting nicer for build methods.
