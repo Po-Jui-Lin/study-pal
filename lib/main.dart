@@ -1,12 +1,10 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:study_pal/chat/chatScreens/chat.dart';
 
 import 'package:provider/provider.dart';
+import 'package:study_pal/chat/chatScreens/chat.dart';
 import 'package:study_pal/page/todo_page.dart';
 import 'package:study_pal/provider/todos.dart';
-import 'package:study_pal/page/home_page.dart';
-
 import 'package:study_pal/page/home_page.dart';
 
 Future main() async {
@@ -44,7 +42,7 @@ class _BottomNavigationControllerState extends State<BottomNavigationController>
   int _currentIndex = 0;
 
   // todo: replace the 5 pages with real pages
-  final pages = [HomePage(), HomePage(), TodoPage(), HomePage(), HomePage()];
+  final pages = [HomePage(), HomePage(), TodoPage(), Chat(), HomePage()];
 
   @override
   Widget build(BuildContext context) {

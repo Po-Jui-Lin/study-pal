@@ -42,20 +42,24 @@ class _MessageListState extends State<MessageList> {
       child: StreamBuilder(
         stream: FirebaseFirestore.instance.collection('message').doc(groupId).collection(groupId).orderBy('timestamp', descending: true).limit(_limit).snapshots(),
         builder: (context, snapshot) {
-          if (snapshot.data.docs.length == 0) {
-            return Center(child: Text("no message"));
-          } else {
-            listMessage.addAll(snapshot.data.docs);
-            return ListView.builder(
-              padding: EdgeInsets.all(10.0),
-              // itemBuilder: (context, index) => message(context, index, snapshot.data.docs[index], user, widget.peer),
-              itemBuilder: (context, index) => message(context, index, snapshot.data.docs[index], "mwU8cQ1IX9gu6RXLNvF9AHJNYDm1", "sW7nZtffcdRXrZN9HMNF3FLSw692"),
-              // itemBuilder: (context, index) => Text(index.toString() + snapshot.data.documents[index].toString()),
+          try {
+            if (snapshot.data.docs.length == 0) {
+              return Center(child: Text("no message"));
+            } else {
+              listMessage.addAll(snapshot.data.docs);
+              return ListView.builder(
+                padding: EdgeInsets.all(10.0),
+                // itemBuilder: (context, index) => message(context, index, snapshot.data.docs[index], user, widget.peer),
+                itemBuilder: (context, index) => message(context, index, snapshot.data.docs[index], "mwU8cQ1IX9gu6RXLNvF9AHJNYDm1", "sW7nZtffcdRXrZN9HMNF3FLSw692"),
+                // itemBuilder: (context, index) => Text(index.toString() + snapshot.data.documents[index].toString()),
 
-              itemCount: snapshot.data.docs.length,
-              reverse: true,
-              controller: listScrollController,
-            );
+                itemCount: snapshot.data.docs.length,
+                reverse: true,
+                controller: listScrollController,
+              );
+            }
+          } catch (e) {
+            return Center(child: Text("no message"));
           }
         },
       ),
