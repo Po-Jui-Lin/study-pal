@@ -1,8 +1,11 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+
 import 'package:provider/provider.dart';
 import 'package:study_pal/page/todo_page.dart';
 import 'package:study_pal/provider/todos.dart';
+import 'package:study_pal/page/home_page.dart';
+
 import 'package:study_pal/page/home_page.dart';
 
 Future main() async {
@@ -44,12 +47,11 @@ class _BottomNavigationControllerState
   // todo: replace the 5 pages with real pages
   final pages = [HomePage(), HomePage(), TodoPage(), HomePage(), HomePage()];
 
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // appBar: AppBar(
-      //   title: Text('Study Pal'),
-      // ),
+
       body: pages[_currentIndex],
       bottomNavigationBar: BottomNavigationBar(
         items: <BottomNavigationBarItem>[
