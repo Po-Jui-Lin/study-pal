@@ -48,7 +48,7 @@ class _TodoPageState extends State<TodoPage> {
         backgroundColor: Colors.black,
         onPressed: () => showDialog(
           context: context,
-          builder: (_) => AddTodoDialogWidget(),
+          builder: (context) => AddTodoDialogWidget(),
         ),
         child: Icon(Icons.add),
       ),
