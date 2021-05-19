@@ -20,7 +20,6 @@ class _ChatState extends State<Chat> {
         children: <Widget>[
           Column(
             children: <Widget>[
-              // Text("hello"),
               // List of messages
               MessageList(),
 
