@@ -55,7 +55,7 @@ class _MessageListState extends State<MessageList> {
               // itemBuilder: (context, index) => message(context, index, snapshot.data.docs[index], user, widget.peer),
               itemBuilder: (context, index) => message(context, index, snapshot.data.docs[index], "mwU8cQ1IX9gu6RXLNvF9AHJNYDm1", "sW7nZtffcdRXrZN9HMNF3FLSw692"),
               // itemBuilder: (context, index) => Text(index.toString() + snapshot.data.documents[index].toString()),
-              // itemBuilder: (context, index) => Text(index.toString()),
+              
               itemCount: snapshot.data.docs.length,
               reverse: true,
               controller: listScrollController,

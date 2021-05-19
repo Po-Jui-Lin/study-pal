@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:study_pal/chat/service/send_text.dart';
+import 'package:study_pal/chat/service/send.dart';
+import 'package:study_pal/chat/service/send_image.dart';
 
 // Widget input(User user, Staff peer) {
 Widget input() {
@@ -15,6 +16,7 @@ Widget input() {
             child: IconButton(
               icon: Icon(Icons.image),
               // onPressed: () => sendImage(user.uid, peer.firebaseId),
+              onPressed: () => sendImage("mwU8cQ1IX9gu6RXLNvF9AHJNYDm1", "sW7nZtffcdRXrZN9HMNF3FLSw692"),
               color: Colors.black,
             ),
           ),
