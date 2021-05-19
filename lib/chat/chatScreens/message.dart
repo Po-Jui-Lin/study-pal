@@ -6,7 +6,6 @@ import 'package:study_pal/chat/chatScreens/multimedia_message/text_msg.dart';
 import 'package:study_pal/chat/chatScreens/timestamp.dart';
 
 Widget message(BuildContext context, int index, DocumentSnapshot document, String userId, String peerId) {
-  // print(document.get("content"));
   if (document.get('idFrom') == userId) {
     // Right (my message)
     return Column(

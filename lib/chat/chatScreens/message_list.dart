@@ -38,9 +38,7 @@ class _MessageListState extends State<MessageList> {
     // final String groupId = user.uid.hashCode <= widget.peer.firebaseId.hashCode ? user.uid + '-' + widget.peer.firebaseId : widget.peer.firebaseId + '-' + user.uid;
     final String groupId = "mwU8cQ1IX9gu6RXLNvF9AHJNYDm1-sW7nZtffcdRXrZN9HMNF3FLSw692"; //temp
 
-    // print(groupId);
     return Flexible(
-      // child: Text(groupId),
       child: StreamBuilder(
         stream: FirebaseFirestore.instance.collection('message').doc(groupId).collection(groupId).orderBy('timestamp', descending: true).limit(_limit).snapshots(),
         builder: (context, snapshot) {
@@ -49,18 +47,15 @@ class _MessageListState extends State<MessageList> {
           } else {
             listMessage.addAll(snapshot.data.docs);
             return ListView.builder(
-              //   scrollDirection: Axis.vertical,
-              // shrinkWrap: true,
               padding: EdgeInsets.all(10.0),
               // itemBuilder: (context, index) => message(context, index, snapshot.data.docs[index], user, widget.peer),
               itemBuilder: (context, index) => message(context, index, snapshot.data.docs[index], "mwU8cQ1IX9gu6RXLNvF9AHJNYDm1", "sW7nZtffcdRXrZN9HMNF3FLSw692"),
               // itemBuilder: (context, index) => Text(index.toString() + snapshot.data.documents[index].toString()),
-              
+
               itemCount: snapshot.data.docs.length,
               reverse: true,
               controller: listScrollController,
             );
-            // return Center(child: Text("haha"));
           }
         },
       ),

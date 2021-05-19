@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
 void send(String content, int type, String userId, String peerId, TextEditingController textEditingController) {
-  print("inside");
   final String groupId = userId.hashCode <= peerId.hashCode ? userId + '-' + peerId : peerId + '-' + userId;
 
   // type: 0 = text, 1 = image, 2 = sticker
