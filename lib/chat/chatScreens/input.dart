@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:study_pal/chat/service/send.dart';
+import 'package:study_pal/chat/service/send_file.dart';
 import 'package:study_pal/chat/service/send_image.dart';
 
 // Widget input(User user, Staff peer) {
@@ -28,6 +29,7 @@ Widget input() {
             child: IconButton(
               icon: Icon(Icons.attach_file),
               // onPressed: () => sendFile(user.uid, peer.firebaseId),
+              onPressed: () => sendFile("mwU8cQ1IX9gu6RXLNvF9AHJNYDm1", "sW7nZtffcdRXrZN9HMNF3FLSw692"),
               color: Colors.black,
             ),
           ),
