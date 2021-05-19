@@ -44,7 +44,6 @@ class _MessageListState extends State<MessageList> {
       child: StreamBuilder(
         stream: FirebaseFirestore.instance.collection('message').doc(groupId).collection(groupId).orderBy('timestamp', descending: true).limit(_limit).snapshots(),
         builder: (context, snapshot) {
-          print(snapshot.data.docs.length);
           if (snapshot.data.docs.length == 0) {
             return Center(child: Text("no message"));
           } else {

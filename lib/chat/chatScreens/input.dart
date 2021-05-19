@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:study_pal/chat/service/send_text.dart';
 
 // Widget input(User user, Staff peer) {
 Widget input() {
@@ -35,9 +36,10 @@ Widget input() {
         Flexible(
           child: Container(
             child: TextField(
-              // onSubmitted: (value) {
-              //   send(textEditingController.text, 0, user.uid, peer.firebaseId, textEditingController);
-              // },
+              onSubmitted: (value) {
+                // send(textEditingController.text, 0, user.uid, peer.firebaseId, textEditingController);
+                send(textEditingController.text, 0, "mwU8cQ1IX9gu6RXLNvF9AHJNYDm1", "sW7nZtffcdRXrZN9HMNF3FLSw692", textEditingController);
+              },
               style: TextStyle(color: Colors.black, fontSize: 15.0),
               controller: textEditingController,
               decoration: InputDecoration.collapsed(
@@ -55,7 +57,7 @@ Widget input() {
             margin: EdgeInsets.symmetric(horizontal: 8.0),
             child: IconButton(
               icon: Icon(Icons.send),
-              // onPressed: () => send(textEditingController.text, 0, user.uid, peer.firebaseId, textEditingController),
+              onPressed: () => send(textEditingController.text, 0, "mwU8cQ1IX9gu6RXLNvF9AHJNYDm1", "sW7nZtffcdRXrZN9HMNF3FLSw692", textEditingController),
               color: Colors.black,
             ),
           ),
