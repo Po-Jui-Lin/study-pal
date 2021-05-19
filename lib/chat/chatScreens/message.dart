@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:study_pal/chat/chatScreens/multimedia_message/file_msg.dart';
 import 'package:study_pal/chat/chatScreens/multimedia_message/photo_msg.dart';
 import 'package:study_pal/chat/chatScreens/multimedia_message/text_msg.dart';
 import 'package:study_pal/chat/chatScreens/timestamp.dart';
@@ -19,10 +20,10 @@ Widget message(BuildContext context, int index, DocumentSnapshot document, Strin
                 // Image
                 : document.get('type') == 1
                     ? photoMsg(document, context)
-                    //     // file
-                    //     : document.data()['type'] == 2
-                    //         ? fileMsg(document)
-                    : Container(), // dummy else statement for error message type
+                    // file
+                    : document.get('type') == 2
+                        ? fileMsg(document)
+                        : Container(), // dummy else statement for error message type
           ],
           mainAxisAlignment: MainAxisAlignment.end,
         ),
@@ -43,11 +44,11 @@ Widget message(BuildContext context, int index, DocumentSnapshot document, Strin
                   // photo msg
                   : document.get('type') == 1
                       ? photoMsg(document, context)
-                      //     // file type message
-                      //     : document.data()['type'] == 2
-                      //         ? fileMsg(document)
-                      // dummy else statement for error message type
-                      : Container(),
+                      // file type message
+                      : document.get('type') == 2
+                          ? fileMsg(document)
+                          // dummy else statement for error message type
+                          : Container(),
             ],
           ),
           timestamp(document, false),
