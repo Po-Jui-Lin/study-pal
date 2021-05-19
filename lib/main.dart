@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:study_pal/page/todo_page.dart';
 import 'package:study_pal/provider/todos.dart';
+import 'package:study_pal/page/home_page.dart';
 
 Future main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -22,20 +23,73 @@ class MyApp extends StatelessWidget {
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         title: 'Study Pal',
-        theme: ThemeData(
-          // This is the theme of your application.
-          //
-          // Try running your application with "flutter run". You'll see the
-          // application has a blue toolbar. Then, without quitting the app, try
-          // changing the primarySwatch below to Colors.green and then invoke
-          // "hot reload" (press "r" in the console where you ran "flutter run",
-          // or simply save your changes to "hot reload" in a Flutter IDE).
-          // Notice that the counter didn't reset back to zero; the application
-          // is not restarted.
-          primarySwatch: Colors.blue,
-        ),
-        home: TodoPage(),
+        home: BottomNavigationController(),
       ),
     );
+  }
+}
+
+class BottomNavigationController extends StatefulWidget {
+  BottomNavigationController({Key key}) : super(key: key);
+
+  @override
+  _BottomNavigationControllerState createState() =>
+      _BottomNavigationControllerState();
+}
+
+class _BottomNavigationControllerState
+    extends State<BottomNavigationController> {
+  int _currentIndex = 0;
+
+  // todo: replace the 5 pages with real pages
+  final pages = [HomePage(), HomePage(), TodoPage(), HomePage(), HomePage()];
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Study Pal'),
+      ),
+      body: pages[_currentIndex],
+      bottomNavigationBar: BottomNavigationBar(
+        items: <BottomNavigationBarItem>[
+          BottomNavigationBarItem(
+            icon: Icon(Icons.home),
+            label: 'Home',
+            backgroundColor: Colors.amber,
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.favorite),
+            label: 'Matches',
+            backgroundColor: Colors.amber,
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.list),
+            label: 'Todo',
+            backgroundColor: Colors.amber,
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.chat),
+            label: 'Chat',
+            backgroundColor: Colors.amber,
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.account_circle),
+            label: 'Profile',
+            backgroundColor: Colors.amber,
+          ),
+        ],
+        currentIndex: _currentIndex,
+        selectedItemColor: Colors.white,
+        unselectedItemColor: Colors.grey[400],
+        onTap: _onItemClick,
+      ),
+    );
+  }
+
+  void _onItemClick(int index) {
+    setState(() {
+      _currentIndex = index;
+    });
   }
 }
