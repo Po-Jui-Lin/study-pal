@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:study_pal/api/firebase_api.dart';
 import 'package:study_pal/main.dart';
+import 'package:study_pal/model/todo.dart';
+import 'package:study_pal/provider/todos.dart';
 import 'package:study_pal/widget/add_todo_dialog_widget.dart';
 import 'package:study_pal/widget/todo_list_widget.dart';
 
@@ -17,7 +21,26 @@ class _TodoPageState extends State<TodoPage> {
       appBar: AppBar(
         title: Text(MyApp.title),
       ),
-      body: TodoListWidget(),
+      body: StreamBuilder<List<Todo>>(
+        stream: FirebaseApi.readTodos(),
+        builder: (context, snapshot) {
+          switch (snapshot.connectionState) {
+            case ConnectionState.waiting:
+              return Center(child: CircularProgressIndicator());
+            default:
+              if (snapshot.hasError) {
+                return buildText('Something Went Wrong Try later');
+              } else {
+                final todos = snapshot.data;
+
+                final provider = Provider.of<TodosProvider>(context);
+                provider.setTodos(todos);
+
+                return TodoListWidget();
+              }
+          }
+        },
+      ),
       floatingActionButton: FloatingActionButton(
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(20),
@@ -32,3 +55,10 @@ class _TodoPageState extends State<TodoPage> {
     );
   }
 }
+
+Widget buildText(String text) => Center(
+      child: Text(
+        text,
+        style: TextStyle(fontSize: 24, color: Colors.white),
+      ),
+    );

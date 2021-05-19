@@ -35,6 +35,10 @@ dependencies:
   # slidable widget
   flutter_slidable: ^0.6.0
 
+  # firebase integration
+  firebase_core: ^1.2.0
+  cloud_firestore: ^2.2.0
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
