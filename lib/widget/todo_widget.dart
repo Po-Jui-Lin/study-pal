@@ -51,7 +51,8 @@ class TodoWidget extends StatelessWidget {
               Checkbox(
                 activeColor: Theme.of(context).primaryColor,
                 checkColor: Colors.white,
-                value: todo.isDone,
+                // if isDone attribute is null, return false
+                value: todo.isDone ?? false,
                 onChanged: (_) {
                   final provider =
                       Provider.of<TodosProvider>(context, listen: false);

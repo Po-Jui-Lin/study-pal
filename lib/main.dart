@@ -47,9 +47,9 @@ class _BottomNavigationControllerState
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Study Pal'),
-      ),
+      // appBar: AppBar(
+      //   title: Text('Study Pal'),
+      // ),
       body: pages[_currentIndex],
       bottomNavigationBar: BottomNavigationBar(
         items: <BottomNavigationBarItem>[
