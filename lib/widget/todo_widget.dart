@@ -56,7 +56,7 @@ class TodoWidget extends StatelessWidget {
                 onChanged: (_) {
                   final provider =
                       Provider.of<TodosProvider>(context, listen: false);
-                  final isDone = provider.toggleTodoStatus(todo)!;
+                  final isDone = provider.toggleTodoStatus(todo, context)!;
 
                   Utils.showSnackBar(
                     context,
@@ -95,7 +95,7 @@ class TodoWidget extends StatelessWidget {
 
   void deleteTodo(BuildContext context, Todo todo) {
     final provider = Provider.of<TodosProvider>(context, listen: false);
-    provider.removeTodo(todo);
+    provider.removeTodo(todo, context);
 
     Utils.showSnackBar(context, 'Deleted the task');
   }

@@ -23,7 +23,7 @@ class _TodoPageState extends State<TodoPage> {
         backgroundColor: Colors.amber,
       ),
       body: StreamBuilder<List<Todo>>(
-        stream: FirebaseApi.readTodos(),
+        stream: FirebaseApi.readTodos(context),
         builder: (context, snapshot) {
           switch (snapshot.connectionState) {
             case ConnectionState.waiting:
