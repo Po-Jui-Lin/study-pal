@@ -35,7 +35,7 @@ class _HomePageState extends State<HomePage> {
                 stream: FirebaseFirestore.instance.collection('users').limit(_limit).snapshots(),
                 builder: (context, snapshot) {
                   try {
-                    if (snapshot.data.docs.length < 1) {
+                    if (snapshot.data!.docs.length < 1) {
                       return Center(child: Text("no users"));
                     } else {
                       if (!snapshot.hasData) {
@@ -43,9 +43,9 @@ class _HomePageState extends State<HomePage> {
                       } else {
                         return ListView.builder(
                           controller: listScrollController,
-                          itemCount: snapshot.data.docs.length,
+                          itemCount: snapshot.data!.docs.length,
                           itemBuilder: (context, index) {
-                            return HomeTile(peer: snapshot.data.docs[index], items: snapshot.data.docs);
+                            return HomeTile(peer: snapshot.data!.docs[index], items: snapshot.data!.docs);
                           },
                         );
                       }

@@ -2,20 +2,19 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 
 class HomeTile extends StatefulWidget {
   final QueryDocumentSnapshot peer;
   final List items;
 
-  HomeTile({this.peer, this.items});
+  HomeTile({required this.peer, required this.items});
 
   @override
   _HomeTileState createState() => _HomeTileState();
 }
 
 class _HomeTileState extends State<HomeTile> {
-  User currentUser = FirebaseAuth.instance.currentUser;
+  User currentUser = FirebaseAuth.instance.currentUser!;
 
   @override
   Widget build(BuildContext context) {
@@ -46,8 +45,8 @@ class _HomeTileState extends State<HomeTile> {
                       // Text(snapshot.data.docs[0].get("title").toString()),
                       ListView.builder(
                     shrinkWrap: true,
-                    itemBuilder: (context, index) => Text(snapshot.data.docs[index].get("title")),
-                    itemCount: snapshot.data.docs.length,
+                    itemBuilder: (context, index) => Text(snapshot.data!.docs[index].get("title")),
+                    itemCount: snapshot.data!.docs.length,
                   ),
                 ),
                 actions: <Widget>[
@@ -97,6 +96,8 @@ class _HomeTileState extends State<HomeTile> {
           );
         },
       );
+    } else {
+      return Container();
     }
   }
 }
