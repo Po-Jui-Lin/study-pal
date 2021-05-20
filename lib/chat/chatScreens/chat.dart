@@ -22,7 +22,7 @@ class _ChatState extends State<Chat> {
         ),
 
         // backgroundColor: MyConstants.appBarColor,
-        backgroundColor: Colors.blue,
+        backgroundColor: Colors.amber,
       ),
       body: Stack(
         children: <Widget>[

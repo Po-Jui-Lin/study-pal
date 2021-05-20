@@ -9,7 +9,7 @@ Container textMsg(DocumentSnapshot document, bool self) {
     ),
     padding: EdgeInsets.fromLTRB(15.0, 10.0, 15.0, 10.0),
     width: 200.0,
-    decoration: BoxDecoration(color: !self ? Colors.blue : Colors.blue[200], borderRadius: BorderRadius.circular(8.0)),
+    decoration: BoxDecoration(color: !self ? Colors.amber[400] : Colors.amber[200], borderRadius: BorderRadius.circular(8.0)),
     margin: EdgeInsets.only(bottom: 5.0, left: 10.0),
   );
 }

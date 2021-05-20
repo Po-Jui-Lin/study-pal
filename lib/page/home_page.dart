@@ -6,6 +6,7 @@ class HomePage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text('Study Pal'),
+        backgroundColor: Colors.amber,
       ),
       body: Center(
         child: Text("Home Page (test)"),
