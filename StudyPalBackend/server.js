@@ -1,6 +1,7 @@
 var express = require('express');
 var app = express();
 const {db} = require('./init.js');
+const {admin} = require('./init.js');
 const bodyParser = require("body-parser");
 
 //Import Routes
