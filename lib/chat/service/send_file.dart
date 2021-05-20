@@ -8,8 +8,8 @@ import 'package:intl/intl.dart';
 import 'package:study_pal/chat/service/send.dart';
 
 Future sendFile(String userId, String peerId) async {
-  File file;
-  FilePickerResult result;
+  late File file;
+  FilePickerResult? result;
 
   String fileUrl = '';
   final String groupId = userId.hashCode <= peerId.hashCode ? userId + '-' + peerId : peerId + '-' + userId;
@@ -21,7 +21,7 @@ Future sendFile(String userId, String peerId) async {
   result = await FilePicker.platform.pickFiles(type: FileType.any);
 
   if (result != null) {
-    file = File(result.files.first.path);
+    file = File(result.files.first.path!);
   }
 
   String fileName = now.millisecondsSinceEpoch.toString();

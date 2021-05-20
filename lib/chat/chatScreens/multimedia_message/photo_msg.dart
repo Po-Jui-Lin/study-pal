@@ -10,7 +10,7 @@ Container photoMsg(DocumentSnapshot document, BuildContext context) {
         child: CachedNetworkImage(
           placeholder: (context, url) => Container(
             child: CircularProgressIndicator(
-              valueColor: AlwaysStoppedAnimation<Color>(Colors.blue[700]),
+              valueColor: AlwaysStoppedAnimation<Color?>(Colors.blue[700]),
             ),
             width: 200.0,
             height: 200.0,

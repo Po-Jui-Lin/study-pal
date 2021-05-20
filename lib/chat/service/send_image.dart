@@ -8,7 +8,7 @@ import 'package:study_pal/chat/service/send.dart';
 
 Future sendImage(String userId, String peerId) async {
   ImagePicker imagePicker = ImagePicker();
-  PickedFile pickedFile;
+  PickedFile? pickedFile;
   File imageFile;
   String imageUrl = '';
   final String groupId = userId.hashCode <= peerId.hashCode ? userId + '-' + peerId : peerId + '-' + userId;
@@ -18,7 +18,7 @@ Future sendImage(String userId, String peerId) async {
   String formattedDate = formatter.format(now);
 
   pickedFile = await imagePicker.getImage(source: ImageSource.gallery);
-  imageFile = File(pickedFile.path);
+  imageFile = File(pickedFile!.path);
 
   String fileName = now.millisecondsSinceEpoch.toString();
   Reference reference = FirebaseStorage.instance.ref().child("chat").child(groupId).child(formattedDate).child(fileName);

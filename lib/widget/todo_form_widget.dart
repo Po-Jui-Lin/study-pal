@@ -1,19 +1,19 @@
 import 'package:flutter/material.dart';
 
 class TodoFormWidget extends StatelessWidget {
-  final String title;
-  final String description;
+  final String? title;
+  final String? description;
   final ValueChanged<String> onChangedTitle;
   final ValueChanged<String> onChangedDescription;
   final VoidCallback onSavedTodo;
 
   const TodoFormWidget({
-    Key key,
+    Key? key,
     this.title = '',
     this.description = '',
-    @required this.onChangedTitle,
-    @required this.onChangedDescription,
-    @required this.onSavedTodo,
+    required this.onChangedTitle,
+    required this.onChangedDescription,
+    required this.onSavedTodo,
   }) : super(key: key);
 
   @override
@@ -35,7 +35,7 @@ class TodoFormWidget extends StatelessWidget {
         initialValue: title,
         onChanged: onChangedTitle,
         validator: (title) {
-          if (title.isEmpty) {
+          if (title!.isEmpty) {
             return 'The title cannot be empty';
           }
           return null;

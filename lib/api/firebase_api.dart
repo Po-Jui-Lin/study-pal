@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:study_pal/model/todo.dart';
 import 'package:study_pal/utils.dart';
+import 'dart:async';
 
 class FirebaseApi {
   static Future<String> createTodo(Todo todo) async {
@@ -16,7 +17,8 @@ class FirebaseApi {
       .collection('todo')
       .orderBy(TodoField.createdTime, descending: true)
       .snapshots()
-      .transform(Utils.transformer(Todo.fromJson));
+      .transform(Utils.transformer(Todo.fromJson) as StreamTransformer<
+          QuerySnapshot<Map<String, dynamic>>, List<Todo>>);
 
   static Future updateTodo(Todo todo) async {
     final docTodo = FirebaseFirestore.instance.collection('todo').doc(todo.id);

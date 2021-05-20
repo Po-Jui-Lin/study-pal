@@ -7,7 +7,7 @@ import 'package:study_pal/widget/todo_form_widget.dart';
 class EditTodoPage extends StatefulWidget {
   final Todo todo;
 
-  const EditTodoPage({Key key, @required this.todo}) : super(key: key);
+  const EditTodoPage({Key? key, required this.todo}) : super(key: key);
 
   @override
   _EditTodoPageState createState() => _EditTodoPageState();
@@ -16,8 +16,8 @@ class EditTodoPage extends StatefulWidget {
 class _EditTodoPageState extends State<EditTodoPage> {
   final _formKey = GlobalKey<FormState>();
 
-  String title;
-  String description;
+  String? title;
+  String? description;
 
   @override
   void initState() {
@@ -63,7 +63,7 @@ class _EditTodoPageState extends State<EditTodoPage> {
       );
 
   void saveTodo() {
-    final isValid = _formKey.currentState.validate();
+    final isValid = _formKey.currentState!.validate();
 
     if (!isValid) {
       return;

@@ -5,7 +5,7 @@ import 'package:study_pal/provider/todos.dart';
 import 'package:study_pal/widget/todo_form_widget.dart';
 
 class AddTodoDialogWidget extends StatefulWidget {
-  const AddTodoDialogWidget({Key key}) : super(key: key);
+  const AddTodoDialogWidget({Key? key}) : super(key: key);
 
   @override
   _AddTodoDialogWidgetState createState() => _AddTodoDialogWidgetState();
@@ -48,7 +48,7 @@ class _AddTodoDialogWidgetState extends State<AddTodoDialogWidget> {
   }
 
   void addTodo() {
-    final isValid = _formKey.currentState.validate();
+    final isValid = _formKey.currentState!.validate();
 
     if (!isValid) {
       return;

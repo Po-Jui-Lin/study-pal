@@ -8,7 +8,7 @@ import 'package:study_pal/widget/add_todo_dialog_widget.dart';
 import 'package:study_pal/widget/todo_list_widget.dart';
 
 class TodoPage extends StatefulWidget {
-  const TodoPage({Key key}) : super(key: key);
+  const TodoPage({Key? key}) : super(key: key);
 
   @override
   _TodoPageState createState() => _TodoPageState();

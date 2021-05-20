@@ -41,7 +41,7 @@ class MyApp extends StatelessWidget {
 }
 
 class BottomNavigationController extends StatefulWidget {
-  BottomNavigationController({Key key}) : super(key: key);
+  BottomNavigationController({Key? key}) : super(key: key);
 
   @override
   _BottomNavigationControllerState createState() =>

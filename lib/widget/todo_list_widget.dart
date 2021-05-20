@@ -7,7 +7,7 @@ class TodoListWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final provider = Provider.of<TodosProvider>(context);
-    final todos = provider.todos;
+    final todos = provider.todos!;
 
     return todos.isEmpty
         ? Center(

@@ -11,8 +11,8 @@ class TodoWidget extends StatelessWidget {
   final Todo todo;
 
   const TodoWidget({
-    @required this.todo,
-    Key key,
+    required this.todo,
+    Key? key,
   }) : super(key: key);
 
   @override
@@ -20,7 +20,7 @@ class TodoWidget extends StatelessWidget {
         borderRadius: BorderRadius.circular(16),
         child: Slidable(
           actionPane: SlidableDrawerActionPane(),
-          key: Key(todo.id),
+          key: Key(todo.id!),
           actions: [
             IconSlideAction(
               color: Colors.green,
@@ -56,7 +56,7 @@ class TodoWidget extends StatelessWidget {
                 onChanged: (_) {
                   final provider =
                       Provider.of<TodosProvider>(context, listen: false);
-                  final isDone = provider.toggleTodoStatus(todo);
+                  final isDone = provider.toggleTodoStatus(todo)!;
 
                   Utils.showSnackBar(
                     context,
@@ -70,18 +70,18 @@ class TodoWidget extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      todo.title,
+                      todo.title!,
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
                         color: Theme.of(context).primaryColor,
                         fontSize: 22,
                       ),
                     ),
-                    if (todo.description.isNotEmpty)
+                    if (todo.description!.isNotEmpty)
                       Container(
                         margin: EdgeInsets.only(top: 4),
                         child: Text(
-                          todo.description,
+                          todo.description!,
                           style: TextStyle(fontSize: 20, height: 1.5),
                         ),
                       )
