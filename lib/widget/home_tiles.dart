@@ -1,80 +1,72 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+import 'package:flutter_slidable/flutter_slidable.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
-class StaffTile extends StatelessWidget {
-  final Staff staff;
-  StaffTile({this.staff});
+class UserTile extends StatefulWidget {
+  final QueryDocumentSnapshot peer;
+  final List items;
+
+  UserTile({this.peer, this.items});
+
+  @override
+  _UserTileState createState() => _UserTileState();
+}
+
+class _UserTileState extends State<UserTile> {
+  User currentUser = FirebaseAuth.instance.currentUser;
 
   @override
   Widget build(BuildContext context) {
-    final user = Provider.of<User>(context);
+    // return Text(user["name"]);
 
     return Padding(
       padding: EdgeInsets.only(top: 8.0),
       child: Card(
         margin: EdgeInsets.fromLTRB(20.0, 6.0, 20.0, 0.0),
-        child: ExpansionTile(
-          leading: CircleAvatar(
-            radius: 25.0,
-            backgroundImage: NetworkImage(staff.profilePic),
+        child: Slidable(
+          key: Key(widget.peer.id),
+          // key: UniqueKey(),
+          actionPane: SlidableDrawerActionPane(),
+          actionExtentRatio: 0.2,
+          direction: Axis.horizontal,
+          child: ListTile(
+            // leading: CircleAvatar(
+            //   radius: 25.0,
+            //   backgroundImage: NetworkImage(staff.profilePic),
+            // ),
+            title: Text(widget.peer["name"]),
           ),
-          title: Text(staff.name),
-          // subtitle: Text(staff.phone + '\n' + staff.email),
-          children: <Widget>[
-            IntrinsicHeight(
-              child: Row(
-                children: <Widget>[
-                  Expanded(
-                    child: TextButton(
-                      child: Text(
-                        staff.email,
-                        textAlign: TextAlign.center,
-                      ),
-                      onPressed: () async {
-                        String _url = "mailto:" + staff.email;
-                        await canLaunch(_url) ? await launch(_url) : throw 'Could not launch $_url';
-                      },
-                    ),
-                  ),
-                  VerticalDivider(
-                    color: Colors.grey,
-                    thickness: 2,
-                  ),
-                  Expanded(
-                    child: TextButton(
-                      child: Text(
-                        staff.phone,
-                        textAlign: TextAlign.center,
-                      ),
-                      onPressed: () async {
-                        String _url = "tel:" + staff.phone;
-                        await canLaunch(_url) ? await launch(_url) : throw 'Could not launch $_url';
-                      },
-                    ),
-                  ),
-                  user.uid != staff.firebaseId
-                      ? VerticalDivider(
-                          color: Colors.grey,
-                          thickness: 2,
-                        )
-                      : SizedBox.shrink(),
-                  user.uid != staff.firebaseId
-                      ? IconButton(
-                          icon: Icon(Icons.message_rounded),
-                          onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (context) => Chat(staff: staff))),
-                        )
-                      : SizedBox.shrink(),
-                ],
-              ),
+          actions: <Widget>[
+            IconSlideAction(
+              caption: 'Archive',
+              color: Colors.blue,
+              icon: Icons.archive,
+              // onTap: () => _showSnackBar('Archive'),
             ),
           ],
-          // trailing: user.uid != staff.firebaseId
-          //     ? IconButton(
-          //         icon: Icon(Icons.message_rounded),
-          //         onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (context) => Chat(staff: staff))),
-          //       )
-          //     : SizedBox.shrink(),
+          secondaryActions: <Widget>[
+            IconSlideAction(
+              caption: 'Archive',
+              color: Colors.blue,
+              icon: Icons.archive,
+              // onTap: () => _showSnackBar('Archive'),
+            ),
+          ],
+          dismissal: SlidableDismissal(
+            child: SlidableDrawerDismissal(),
+            onDismissed: (actionType) async {
+              Fluttertoast.showToast(msg: actionType == SlideActionType.primary ? 'left 2 right' : 'right 2 left');
+              await FirebaseFirestore.instance.collection('users').doc(widget.peer.id).update({
+                "todayMatchedWith": currentUser.uid,
+              });
+              await FirebaseFirestore.instance.collection('users').doc(currentUser.uid).update({
+                "todayMatchedWith": widget.peer.id,
+              });
+              widget.items.remove(widget.peer.id);
+            },
+          ),
         ),
       ),
     );
