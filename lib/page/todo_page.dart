@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:study_pal/api/firebase_api.dart';
@@ -22,26 +23,33 @@ class _TodoPageState extends State<TodoPage> {
         title: Text(MyApp.title),
         backgroundColor: Colors.amber,
       ),
-      body: StreamBuilder<List<Todo>>(
-        stream: FirebaseApi.readTodos(context),
-        builder: (context, snapshot) {
-          switch (snapshot.connectionState) {
-            case ConnectionState.waiting:
-              return Center(child: CircularProgressIndicator());
-            default:
-              if (snapshot.hasError) {
-                return buildText('Something Went Wrong Try later');
-              } else {
-                final todos = snapshot.data;
+      body: FirebaseAuth.instance.currentUser == null
+          ? Center(
+              child: Text(
+                'Please sign in first!',
+                style: TextStyle(fontSize: 20),
+              ),
+            )
+          : StreamBuilder<List<Todo>>(
+              stream: FirebaseApi.readTodos(),
+              builder: (context, snapshot) {
+                switch (snapshot.connectionState) {
+                  case ConnectionState.waiting:
+                    return Center(child: CircularProgressIndicator());
+                  default:
+                    if (snapshot.hasError) {
+                      return buildText('Something Went Wrong Try later');
+                    } else {
+                      final todos = snapshot.data;
 
-                final provider = Provider.of<TodosProvider>(context);
-                provider.setTodos(todos);
+                      final provider = Provider.of<TodosProvider>(context);
+                      provider.setTodos(todos);
 
-                return TodoListWidget();
-              }
-          }
-        },
-      ),
+                      return TodoListWidget();
+                    }
+                }
+              },
+            ),
       floatingActionButton: FloatingActionButton(
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(20),

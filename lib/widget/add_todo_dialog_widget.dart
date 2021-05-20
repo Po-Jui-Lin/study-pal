@@ -61,7 +61,7 @@ class _AddTodoDialogWidgetState extends State<AddTodoDialogWidget> {
       );
 
       final provider = Provider.of<TodosProvider>(context, listen: false);
-      provider.addTodo(todo, context);
+      provider.addTodo(todo);
 
       // pop this dialog away
       Navigator.of(context).pop();
