@@ -35,11 +35,11 @@ class SignUpWidget extends StatelessWidget {
             SizedBox(height: 20),
             ElevatedButton.icon(
               style: ElevatedButton.styleFrom(
-                primary: Colors.grey[900],
+                primary: Colors.grey,
                 onPrimary: Colors.black,
                 minimumSize: Size(double.infinity, 50),
               ),
-              icon: FaIcon(FontAwesomeIcons.google, color: Colors.red),
+              icon: FaIcon(FontAwesomeIcons.google, color: Colors.amber),
               label: Text(
                 'Login with Google',
                 style: TextStyle(
