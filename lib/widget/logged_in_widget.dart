@@ -11,13 +11,13 @@ class LoggedInWidget extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text('Logged In'),
+        backgroundColor: Colors.amber,
         centerTitle: true,
         actions: [
           TextButton(
             child: Text('Logout'),
             onPressed: () {
-              final provider =
-                  Provider.of<GoogleSignInProvider>(context, listen: false);
+              final provider = Provider.of<GoogleSignInProvider>(context, listen: false);
               provider.logout();
             },
           )

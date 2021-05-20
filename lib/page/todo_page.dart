@@ -20,6 +20,7 @@ class _TodoPageState extends State<TodoPage> {
     return Scaffold(
       appBar: AppBar(
         title: Text(MyApp.title),
+        backgroundColor: Colors.amber,
       ),
       body: StreamBuilder<List<Todo>>(
         stream: FirebaseApi.readTodos(),
