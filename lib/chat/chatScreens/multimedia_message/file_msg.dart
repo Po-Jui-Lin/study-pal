@@ -10,7 +10,7 @@ ClipRRect fileMsg(DocumentSnapshot document) {
       children: <Widget>[
         Icon(
           Icons.insert_drive_file,
-          color: Colors.blue[400],
+          color: Colors.amber[400],
           size: 60.0,
         ),
         Container(
@@ -18,7 +18,7 @@ ClipRRect fileMsg(DocumentSnapshot document) {
           child: IconButton(
             icon: Icon(
               Icons.open_in_browser,
-              color: Colors.blue[500],
+              color: Colors.amber[500],
             ),
             onPressed: () async {
               String _url = document.get('content');
