@@ -3,7 +3,9 @@ import 'package:flutter/material.dart';
 
 import 'package:provider/provider.dart';
 import 'package:study_pal/chat/chatScreens/chat.dart';
+import 'package:study_pal/page/profile_page.dart';
 import 'package:study_pal/page/todo_page.dart';
+import 'package:study_pal/provider/google_sign_in.dart';
 import 'package:study_pal/provider/todos.dart';
 import 'package:study_pal/page/home_page.dart';
 
@@ -20,8 +22,15 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider(
-      create: (context) => TodosProvider(),
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(
+          create: (context) => TodosProvider(),
+        ),
+        ChangeNotifierProvider(
+          create: (context) => GoogleSignInProvider(),
+        ),
+      ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         title: 'Study Pal',
@@ -35,14 +44,16 @@ class BottomNavigationController extends StatefulWidget {
   BottomNavigationController({Key key}) : super(key: key);
 
   @override
-  _BottomNavigationControllerState createState() => _BottomNavigationControllerState();
+  _BottomNavigationControllerState createState() =>
+      _BottomNavigationControllerState();
 }
 
-class _BottomNavigationControllerState extends State<BottomNavigationController> {
+class _BottomNavigationControllerState
+    extends State<BottomNavigationController> {
   int _currentIndex = 0;
 
   // todo: replace the 5 pages with real pages
-  final pages = [HomePage(), HomePage(), TodoPage(), Chat(), HomePage()];
+  final pages = [HomePage(), HomePage(), TodoPage(), Chat(), ProfilePage()];
 
   @override
   Widget build(BuildContext context) {
