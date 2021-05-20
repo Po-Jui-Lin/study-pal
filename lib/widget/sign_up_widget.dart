@@ -16,7 +16,7 @@ class SignUpWidget extends StatelessWidget {
             Align(
               alignment: Alignment.centerLeft,
               child: Text(
-                'Hey There,\nWelcome Back',
+                'Hey There,\nReady to study?',
                 style: TextStyle(
                   fontSize: 24,
                   fontWeight: FontWeight.bold,
@@ -32,41 +32,25 @@ class SignUpWidget extends StatelessWidget {
               ),
             ),
             Spacer(),
-            ElevatedButton.icon(
-              onPressed: () {},
-              icon: Icon(Icons.email_outlined),
-              label: Text('Sign Up with Email'),
-              style: ElevatedButton.styleFrom(
-                primary: Colors.blue,
-                minimumSize: Size(double.infinity, 50),
-              ),
-            ),
             SizedBox(height: 20),
             ElevatedButton.icon(
               style: ElevatedButton.styleFrom(
-                primary: Colors.white,
+                primary: Colors.grey[900],
                 onPrimary: Colors.black,
                 minimumSize: Size(double.infinity, 50),
               ),
               icon: FaIcon(FontAwesomeIcons.google, color: Colors.red),
-              label: Text('Sign Up with Google'),
+              label: Text(
+                'Login with Google',
+                style: TextStyle(
+                  color: Colors.white,
+                ),
+              ),
               onPressed: () {
                 final provider =
                     Provider.of<GoogleSignInProvider>(context, listen: false);
                 provider.googleLogin();
               },
-            ),
-            SizedBox(height: 40),
-            RichText(
-              text: TextSpan(
-                text: 'Already have an account? ',
-                children: [
-                  TextSpan(
-                    text: 'Log in',
-                    style: TextStyle(decoration: TextDecoration.underline),
-                  ),
-                ],
-              ),
             ),
             Spacer(),
           ],
