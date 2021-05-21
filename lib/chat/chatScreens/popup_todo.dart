@@ -9,11 +9,16 @@ class PopupTodo extends StatefulWidget {
 }
 
 class _PopupTodoState extends State<PopupTodo> {
+  String peerTodo = "todo items";
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
       title: Text('Todo List of ' + widget.peer),
-      content: const Text('AlertDialog description'),
+      content: Column(
+        children: <Widget>[
+          Text(peerTodo),
+        ],
+      ),
       actions: <Widget>[
         TextButton(
           onPressed: () => Navigator.pop(context, 'Back'),
