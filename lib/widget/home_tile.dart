@@ -23,7 +23,11 @@ class _HomeTileState extends State<HomeTile> {
 
     if (widget.peer.id != currentUser.uid) {
       return StreamBuilder(
-        stream: FirebaseFirestore.instance.collection('users').doc(widget.peer.id).collection("todoList").snapshots(),
+        stream: FirebaseFirestore.instance
+            .collection('users')
+            .doc(widget.peer.id)
+            .collection("todoList")
+            .snapshots(),
         builder: (context, snapshot) {
           return Padding(
             padding: EdgeInsets.only(top: 8.0),
@@ -38,16 +42,17 @@ class _HomeTileState extends State<HomeTile> {
                 child: ListTile(
                   leading: CircleAvatar(
                     radius: 25.0,
-                    backgroundImage: NetworkImage("https://firebasestorage.googleapis.com/v0/b/study-pal-1187e.appspot.com/o/DSC05392.JPG?alt=media&token=c87cff17-9f4a-4c01-a30e-90cfaf322add"),
+                    backgroundImage: NetworkImage(
+                        "https://firebasestorage.googleapis.com/v0/b/study-pal-1187e.appspot.com/o/DSC05392.JPG?alt=media&token=c87cff17-9f4a-4c01-a30e-90cfaf322add"),
                   ),
                   title: Text(widget.peer["name"]),
-                  subtitle:
-                      // Text(snapshot.data.docs[0].get("title").toString()),
-                      ListView.builder(
-                    shrinkWrap: true,
-                    itemBuilder: (context, index) => Text(snapshot.data!.docs[index].get("title")),
-                    itemCount: snapshot.data!.docs.length,
-                  ),
+                  // subtitle:
+                  //     // Text(snapshot.data.docs[0].get("title").toString()),
+                  //     ListView.builder(
+                  //   shrinkWrap: true,
+                  //   itemBuilder: (context, index) => Text(snapshot.data!.docs[index].get("title")),
+                  //   itemCount: snapshot.data!.docs.length,
+                  // ),
                 ),
                 actions: <Widget>[
                   IconSlideAction(
