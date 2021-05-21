@@ -1,11 +1,38 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:study_pal/model/todo.dart';
-import 'package:study_pal/utils.dart';
 import 'dart:async';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:study_pal/model/todo.dart';
+import 'package:study_pal/utils.dart';
+
 class FirebaseApi {
+  static Future<void> setUserFirebase({
+    required String? name,
+    required String? photoUrl,
+  }) async {
+    final user = FirebaseAuth.instance.currentUser;
+    print(user!.uid);
+    await FirebaseFirestore.instance.collection('users').doc(user.uid).set(
+      {
+        'uid': user.uid,
+        'photo': photoUrl,
+        'name': name,
+        // 'likedBy': [],
+        // 'usersLiked': [],
+        // 'todayMatchedWith': '',
+      },
+      SetOptions(merge: true),
+    );
+  }
+
+  static Future<Map<String, dynamic>?> getUserData() async {
+    final user = FirebaseAuth.instance.currentUser;
+    final docUser =
+        FirebaseFirestore.instance.collection('users').doc(user!.uid);
+
+    return (await docUser.get()).data();
+  }
+
   static Future<String> createTodo(Todo todo) async {
     final user = FirebaseAuth.instance.currentUser;
     final docTodo = FirebaseFirestore.instance

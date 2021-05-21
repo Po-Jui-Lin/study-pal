@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:study_pal/api/firebase_api.dart';
 
 class GoogleSignInProvider extends ChangeNotifier {
   final googleSignIn = GoogleSignIn();
@@ -23,6 +24,10 @@ class GoogleSignInProvider extends ChangeNotifier {
       );
 
       await FirebaseAuth.instance.signInWithCredential(credential);
+      await FirebaseApi.setUserFirebase(
+        photoUrl: _user!.photoUrl,
+        name: _user!.displayName,
+      );
     } catch (e) {
       print(e.toString());
     }

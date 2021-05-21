@@ -1,13 +1,14 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-
 import 'package:provider/provider.dart';
 import 'package:study_pal/chat/chatScreens/chat.dart';
+import 'package:study_pal/page/home_page.dart';
+import 'package:study_pal/page/matched_page.dart';
 import 'package:study_pal/page/profile_page.dart';
 import 'package:study_pal/page/todo_page.dart';
 import 'package:study_pal/provider/google_sign_in.dart';
 import 'package:study_pal/provider/todos.dart';
-import 'package:study_pal/page/home_page.dart';
+import 'package:study_pal/provider/userData.dart';
 
 Future main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -26,6 +27,9 @@ class MyApp extends StatelessWidget {
       providers: [
         ChangeNotifierProvider(
           create: (context) => TodosProvider(),
+        ),
+        ChangeNotifierProvider(
+          create: (context) => UserDataProvider(),
         ),
         ChangeNotifierProvider(
           create: (context) => GoogleSignInProvider(),
@@ -53,7 +57,7 @@ class _BottomNavigationControllerState
   int _currentIndex = 0;
 
   // todo: replace the 5 pages with real pages
-  final pages = [HomePage(), HomePage(), TodoPage(), Chat(), ProfilePage()];
+  final pages = [HomePage(), MatchPage(), TodoPage(), Chat(), ProfilePage()];
 
   @override
   Widget build(BuildContext context) {

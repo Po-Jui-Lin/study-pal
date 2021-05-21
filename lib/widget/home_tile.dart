@@ -3,6 +3,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:provider/provider.dart';
+import 'package:study_pal/provider/userData.dart';
 
 class HomeTile extends StatefulWidget {
   final QueryDocumentSnapshot peer;
@@ -15,22 +17,44 @@ class HomeTile extends StatefulWidget {
 }
 
 class _HomeTileState extends State<HomeTile> {
-  User currentUser = FirebaseAuth.instance.currentUser!;
+  late User? currentUser;
+
+  @override
+  void initState() {
+    super.initState();
+    if (FirebaseAuth.instance.currentUser != null) {
+      currentUser = FirebaseAuth.instance.currentUser!;
+    } else {
+      currentUser = null;
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
     // DocumentReference<Map<String, dynamic>> peerTodo = FirebaseFirestore.instance.collection('users').doc(widget.peer.id).collection("todoList").doc().;
     // return Text(user["name"]);
 
-    if (widget.peer.id != currentUser.uid) {
-      return StreamBuilder(
+    if (currentUser == null) {
+      return SizedBox();
+    }
+    // print(widget.peer.id);
+    // print(currentUser!.uid);
+
+    if (widget.peer.id != currentUser!.uid) {
+      return StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
         stream: FirebaseFirestore.instance
             .collection('users')
             .doc(widget.peer.id)
-            .collection("todoList")
+            .collection('todo')
             .snapshots(),
         builder: (context, snapshot) {
-          print(snapshot.data.toString());
+          // print('========================');
+          // print(widget.peer.data());
+          // snapshot.data!.docs.forEach((element) {
+          //   print('======================');
+          //   print(element.data());
+          //   print('======================');
+          // });
           return Padding(
             padding: EdgeInsets.only(top: 8.0),
             child: Card(
@@ -44,24 +68,24 @@ class _HomeTileState extends State<HomeTile> {
                 child: ListTile(
                   leading: CircleAvatar(
                     radius: 25.0,
-                    backgroundImage: NetworkImage(
-                        "https://firebasestorage.googleapis.com/v0/b/study-pal-1187e.appspot.com/o/DSC05392.JPG?alt=media&token=c87cff17-9f4a-4c01-a30e-90cfaf322add"),
+                    backgroundImage: NetworkImage((widget.peer.data()
+                            as Map<String, dynamic>)['photo'] ??
+                        // If no photo, default one:
+                        'https://firebasestorage.googleapis.com/v0/b/study-pal-1187e.appspot.com/o/DSC05392.JPG?alt=media&token=c87cff17-9f4a-4c01-a30e-90cfaf322add'),
                   ),
-                  title: Text(widget.peer["name"]),
-                  // subtitle:
-<<<<<<< HEAD
-                  // Text(snapshot.data!.docs[0].get("title").toString()),
-                  //     ListView.builder(
-                  //   shrinkWrap: true,
-                  //   itemBuilder: (context, index) => Text(snapshot.data!.docs["title"]),
-=======
-                  //     // Text(snapshot.data.docs[0].get("title").toString()),
-                  //     ListView.builder(
-                  //   shrinkWrap: true,
-                  //   itemBuilder: (context, index) => Text(snapshot.data!.docs[index].get("title")),
->>>>>>> eab1a0f624df877d035fffb5bd97d1bee2e2062e
-                  //   itemCount: snapshot.data!.docs.length,
-                  // ),
+                  title: Text(
+                      (widget.peer.data() as Map<String, dynamic>)['name'] ??
+                          // If no username exists: empy string
+                          ''),
+                  subtitle:
+                      //     // Text(snapshot.data.docs[0].get("title").toString()),
+                      ListView.builder(
+                    shrinkWrap: true,
+                    itemBuilder: (context, index) =>
+                        Text(snapshot.data!.docs[index].data()['title'] ?? ''),
+                    itemCount:
+                        snapshot.hasData ? snapshot.data!.docs.length : 0,
+                  ),
                 ),
                 actions: <Widget>[
                   IconSlideAction(
@@ -69,12 +93,25 @@ class _HomeTileState extends State<HomeTile> {
                     color: Colors.blue,
                     icon: Icons.done,
                     onTap: () async {
-                      Fluttertoast.showToast(msg: "accept");
-                      await FirebaseFirestore.instance.collection('users').doc(widget.peer.id).update({
-                        "likedBy": FieldValue.arrayUnion([currentUser.uid]),
+                      // print('Liking:');
+                      // print(widget.peer.id);
+                      final userDataProvider =
+                          Provider.of<UserDataProvider>(context, listen: false);
+                      userDataProvider.addUsersLiked(widget.peer.id);
+                      Fluttertoast.showToast(msg: 'accept');
+                      await FirebaseFirestore.instance
+                          .collection('users')
+                          .doc(widget.peer.id)
+                          .update({
+                        'likedBy': FieldValue.arrayUnion([currentUser!.uid]),
                       });
-                      await FirebaseFirestore.instance.collection('users').doc(currentUser.uid).update({
-                        "todayMatchedWith": FieldValue.arrayUnion([widget.peer.id]),
+                      await FirebaseFirestore.instance
+                          .collection('users')
+                          .doc(currentUser!.uid)
+                          .update({
+                        'todayMatchedWith': widget.peer.id,
+                        'usersLiked': FieldValue.arrayUnion([widget.peer.id])
+                        // FieldValue.arrayUnion([widget.peer.id]),
                       });
                     },
                   ),
