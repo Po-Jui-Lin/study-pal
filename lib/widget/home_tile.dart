@@ -65,9 +65,9 @@ class _HomeTileState extends State<HomeTile> {
                 ),
                 actions: <Widget>[
                   IconSlideAction(
-                    caption: 'Accept',
+                    caption: 'Like',
                     color: Colors.blue,
-                    icon: Icons.archive,
+                    icon: Icons.done,
                     onTap: () async {
                       Fluttertoast.showToast(msg: "accept");
                       await FirebaseFirestore.instance.collection('users').doc(widget.peer.id).update({
@@ -81,9 +81,9 @@ class _HomeTileState extends State<HomeTile> {
                 ],
                 // secondaryActions: <Widget>[
                 //   IconSlideAction(
-                //     caption: 'Reject',
+                //     caption: 'Dismiss',
                 //     color: Colors.blue,
-                //     icon: Icons.archive,
+                //     icon: Icons.close_outlined,
                 //     onTap: () {
                 //       Fluttertoast.showToast(msg: "reject");
                 //       setState(() {
