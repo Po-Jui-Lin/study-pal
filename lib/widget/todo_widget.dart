@@ -56,7 +56,7 @@ class TodoWidget extends StatelessWidget {
                 onChanged: (_) {
                   final provider =
                       Provider.of<TodosProvider>(context, listen: false);
-                  final isDone = provider.toggleTodoStatus(todo, context)!;
+                  final isDone = provider.toggleTodoStatus(todo)!;
 
                   Utils.showSnackBar(
                     context,

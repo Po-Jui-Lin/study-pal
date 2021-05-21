@@ -70,7 +70,7 @@ class _EditTodoPageState extends State<EditTodoPage> {
     } else {
       final provider = Provider.of<TodosProvider>(context, listen: false);
 
-      provider.updateTodo(widget.todo, context, title, description);
+      provider.updateTodo(widget.todo, title, description);
 
       // pop this edit page
       Navigator.of(context).pop();
