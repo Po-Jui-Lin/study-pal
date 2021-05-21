@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 class HomeTile extends StatefulWidget {
   final QueryDocumentSnapshot peer;
@@ -55,16 +56,15 @@ class _HomeTileState extends State<HomeTile> {
                     caption: 'Accept',
                     color: Colors.blue,
                     icon: Icons.archive,
-                    // onTap: () async {
-                    //   Fluttertoast.showToast(msg: "accept");
-                    //   await FirebaseFirestore.instance.collection('users').doc(widget.peer.id).update({
-                    //     "todayMatchedWith": currentUser.uid,
-                    //   });
-                    //   await FirebaseFirestore.instance.collection('users').doc(currentUser.uid).update({
-                    //     "todayMatchedWith": widget.peer.id,
-                    //   });
-                    // },
-                    // onTap: () => ,
+                    onTap: () async {
+                      Fluttertoast.showToast(msg: "accept");
+                      await FirebaseFirestore.instance.collection('users').doc(widget.peer.id).update({
+                        "likedBy": FieldValue.arrayUnion([currentUser.uid]),
+                      });
+                      await FirebaseFirestore.instance.collection('users').doc(currentUser.uid).update({
+                        "todayMatchedWith": FieldValue.arrayUnion([widget.peer.id]),
+                      });
+                    },
                   ),
                 ],
                 // secondaryActions: <Widget>[
